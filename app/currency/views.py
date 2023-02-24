@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 from currency.models import Rate, ContactUs
 
@@ -7,20 +6,20 @@ from currency.models import Rate, ContactUs
 
 
 def list_rates(request):
-    qs = Rate.objects.all()
-    result = []
+    rates = Rate.objects.all()
 
-    for rate in qs:
-        result.append(f'id: {rate.id}, buy: {rate.buy}, sell: {rate.sell}, currency: {rate.currency}, source: {rate.source}, created: {rate.created}<br>')
+    context = {
+        'rates': rates
+    }
 
-    return HttpResponse(str(result))
+    return render(request, 'rates_list.html', context)
 
 
 def list_emails(request):
-    qs = ContactUs.objects.all()
-    result = []
+    emails = ContactUs.objects.all()
 
-    for email in qs:
-        result.append(f'id: {email.id}, from: {email.email_from}, subject: {email.subject}, message: {email.message}<br>')
+    context = {
+        'emails': emails
+    }
 
-    return HttpResponse(str(result))
+    return render(request, 'emails_list.html', context)
