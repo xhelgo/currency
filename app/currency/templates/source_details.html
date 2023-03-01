@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Source details
+{% endblock title %}
+
+{% block content %}
+
+    <h1>Rate Details</h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>URL</th>
+        </tr>
+        <tr>
+            <td>{{ source.id }}</td>
+            <td>{{ source.name }}</td>
+            <td><a href="{{ source.source_url }}">{{ source.source_url }}</a></td>
+        </tr>
+    </table>
+
+    <hr>
+    <a href="/sources/list/">Back to all sources</a><br><br>
+
+{% endblock content %}
