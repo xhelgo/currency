@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Rates
+    Rate details
 {% endblock title %}
 
 {% block content %}
 
-    <h1>Rates Table</h1>
-
-    <a href="/rate/create">Create a new rate</a><br><br>
+    <h1>Rate Details</h1>
 
     <table>
         <tr>
@@ -16,21 +14,20 @@
             <th>Buy</th>
             <th>Sell</th>
             <th>Source</th>
-            <th>Actions</th>
+            <th>Currency</th>
+            <th>Created</th>
         </tr>
-        {% for rate in rates %}
         <tr>
             <td>{{ rate.id }}</td>
             <td>{{ rate.buy }}</td>
             <td>{{ rate.sell }}</td>
             <td>{{ rate.source }}</td>
-            <td>
-                <a href="/rate/update/{{ rate.id }}/">Update</a><br>
-                <a href="/rate/delete/{{ rate.id }}/">Delete</a><br>
-                <a href="/rate/details/{{ rate.id }}/">Details</a>
-            </td>
+            <td>{{ rate.currency }}</td>
+            <td>{{ rate.created }}</td>
         </tr>
-        {% endfor %}
     </table>
+
+    <hr>
+    <a href="/rates/list/">Back to all rates</a><br><br>
 
 {% endblock content %}
