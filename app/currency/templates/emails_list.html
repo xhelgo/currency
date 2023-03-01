@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Emails
+{% endblock title %}
+
+{% block content %}
+
+<h1>Emails Table</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>From</th>
+        <th>Subject</th>
+        <th>Message</th>
+    </tr>
+    {% for email in emails %}
+    <tr>
+        <th>{{ email.id }}</th>
+        <th>{{ email.email_from }}</th>
+        <th>{{ email.subject }}</th>
+        <th>{{ email.message }}</th>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
