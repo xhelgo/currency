@@ -12,3 +12,6 @@ makemigrations:
 
 shell:
 	$(manage_py) shell_plus --print-sql
+
+setup:
+	pip install -r requirements.txt
