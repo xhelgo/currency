@@ -8,7 +8,7 @@
 
     <h1>Rate Details</h1>
 
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>ID</th>
             <th>Buy</th>
@@ -28,6 +28,6 @@
     </table>
 
     <hr>
-    <a href="/rates/list/">Back to all rates</a><br><br>
+    <a href="{% url 'currency:rates-list' %}">Back to all rates</a><br><br>
 
 {% endblock content %}

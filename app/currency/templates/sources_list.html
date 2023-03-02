@@ -8,24 +8,24 @@
 
     <h1>Sources Table</h1>
 
-    <a href="/source/create">Create a new source</a><br><br>
+    <a href="{% url 'currency:source-create' %}">Create a new source</a><br><br>
 
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>URL</th>
             <th>Actions</th>
         </tr>
-        {% for source in sources %}
+        {% for source in object_list %}
         <tr>
             <td>{{ source.id }}</td>
             <td>{{ source.name }}</td>
             <td><a href="{{ source.source_url }}">{{ source.source_url }}</a></td>
             <td>
-                <a href="/source/update/{{ source.id }}/">Update</a><br>
-                <a href="/source/delete/{{ source.id }}/">Delete</a><br>
-                <a href="/source/details/{{ source.id }}/">Details</a>
+                <a href="{% url 'currency:source-update' source.id %}">Update</a><br>
+                <a href="{% url 'currency:source-delete' source.id %}">Delete</a><br>
+                <a href="{% url 'currency:source-details' source.id %}">Details</a>
             </td>
         </tr>
         {% endfor %}
