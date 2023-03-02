@@ -14,30 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from currency.views import (
-    list_rates, list_emails,
-    rate_create, rate_update,
-    rate_delete, rate_details,
-    list_sources, source_create,
-    source_update, source_delete,
-    source_details
-)
+from currency.views import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('rates/list/', list_rates),
-    path('rate/create/', rate_create),
-    path('rate/update/<int:pk>/', rate_update),
-    path('rate/delete/<int:pk>/', rate_delete),
-    path('rate/details/<int:pk>/', rate_details),
 
-    path('sources/list/', list_sources),
-    path('source/create/', source_create),
-    path('source/update/<int:pk>/', source_update),
-    path('source/delete/<int:pk>/', source_delete),
-    path('source/details/<int:pk>/', source_details),
+    path('__debug__/', include('debug_toolbar.urls')),
 
-    path('emails/list/', list_emails)
+    path('', IndexView.as_view(), name='homepage'),
+
+    path('currency/', include('currency.urls'))
 ]
