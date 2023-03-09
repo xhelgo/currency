@@ -44,7 +44,7 @@ class SourceAdmin(admin.ModelAdmin):
 
 
 @admin.register(ContactUs)
-class EmailsAdmin(admin.ModelAdmin):
+class ContactUsAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'email_from',
