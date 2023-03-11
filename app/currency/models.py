@@ -20,6 +20,8 @@ class Rate(models.Model):
 
 
 class ContactUs(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=128)
     email_from = models.EmailField(max_length=48)
     subject = models.CharField(max_length=48)
     message = models.TextField()
@@ -37,3 +39,9 @@ class Source(models.Model):
 
     def __str__(self):
         return f'Source: {self.name}, id: {self.id}'
+
+
+class RequestResponseLog(models.Model):
+    path = models.CharField(max_length=255)
+    request = models.CharField(max_length=16)
+    time = models.FloatField()
