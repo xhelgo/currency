@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
 {% block title %}
     Update source
@@ -8,10 +9,14 @@
 
 	<h1>Update the source with id {{ source.id }}</h1>
 
-	<form method="post">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<button type="submit">Submit</button>
-	</form>
+    <div class="row my-3">
+        <div class="col-md-6">
+            <form method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
 
 {% endblock content %}
