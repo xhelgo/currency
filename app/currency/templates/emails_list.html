@@ -7,14 +7,16 @@
 {% block content %}
 
 <h1>Emails Table</h1>
-
-<table class="table table-striped">
-    <tr>
-        <th>ID</th>
-        <th>From</th>
-        <th>Subject</th>
-        <th>Message</th>
-    </tr>
+{% if not request.user.is_superuser %}
+    <p>You don't have access to this page</p>
+{% else %}
+<table class="table table-hover table-bordered mt-4">
+    <thead class="table-dark">
+        <td>ID</td>
+        <td>From</td>
+        <td>Subject</td>
+        <td>Message</td>
+    </thead>
     {% for email in object_list %}
     <tr>
         <td>{{ email.id }}</td>
@@ -24,5 +26,6 @@
     </tr>
     {% endfor %}
 </table>
+{% endif %}
 
 {% endblock content %}

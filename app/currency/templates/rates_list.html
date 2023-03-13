@@ -8,17 +8,20 @@
 
     <h1>Rates Table</h1>
 
-    <a href="{% url 'currency:rate-create' %}">Create a new rate</a><br><br>
+    <a class="btn btn-outline-primary m-b-2" href="{% url 'currency:rate-create' %}" role="button">Create a new rate</a>
+    <hr>
 
-    <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>Buy</th>
-            <th>Sell</th>
-            <th>Currency</th>
-            <th>Source</th>
-            <th>Actions</th>
-        </tr>
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <td>ID</td>
+            <td>Buy</td>
+            <td>Sell</td>
+            <td>Currency</td>
+            <td>Source</td>
+            {% if request.user.is_authenticated %}
+                <td>Actions</td>
+            {% endif %}
+        </thead>
         {% for rate in object_list %}
         <tr>
             <td>{{ rate.id }}</td>
@@ -26,11 +29,15 @@
             <td>{{ rate.sell }}</td>
             <td>{{ rate.get_currency_display }}</td>
             <td>{{ rate.source }}</td>
+            {% if request.user.is_authenticated %}
             <td>
-                <a href="{% url 'currency:rate-update' rate.id %}">Update</a><br>
-                <a href="{% url 'currency:rate-delete' rate.id %}">Delete</a><br>
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'currency:rate-update' rate.id %}">Update</a><br>
+                    <a href="{% url 'currency:rate-delete' rate.id %}">Delete</a><br>
+                {% endif %}
                 <a href="{% url 'currency:rate-details' rate.id %}">Details</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

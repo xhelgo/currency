@@ -8,25 +8,32 @@
 
     <h1>Sources Table</h1>
 
-    <a href="{% url 'currency:source-create' %}">Create a new source</a><br><br>
+    <a class="btn btn-outline-primary m-b-2" href="{% url 'currency:source-create' %}" role="button">Create a new source</a>
+    <hr>
 
-    <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>URL</th>
-            <th>Actions</th>
-        </tr>
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <td>ID</td>
+            <td>Name</td>
+            <td>URL</td>
+            {% if request.user.is_authenticated %}
+                <td>Actions</td>
+            {% endif %}
+        </thead>
         {% for source in object_list %}
         <tr>
             <td>{{ source.id }}</td>
             <td>{{ source.name }}</td>
             <td><a href="{{ source.source_url }}">{{ source.source_url }}</a></td>
-            <td>
-                <a href="{% url 'currency:source-update' source.id %}">Update</a><br>
-                <a href="{% url 'currency:source-delete' source.id %}">Delete</a><br>
-                <a href="{% url 'currency:source-details' source.id %}">Details</a>
-            </td>
+            {% if request.user.is_authenticated %}
+                <td>
+                    {% if request.user.is_superuser %}
+                        <a href="{% url 'currency:source-update' source.id %}">Update</a><br>
+                        <a href="{% url 'currency:source-delete' source.id %}">Delete</a><br>
+                    {% endif %}
+                    <a href="{% url 'currency:source-details' source.id %}">Details</a>
+                </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

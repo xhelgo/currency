@@ -10,7 +10,7 @@
 
 	<form method="post">
 		{% csrf_token %}
-		<button type="submit">Yes</button>
+		<button type="submit" class="btn btn-danger">Yes, delete</button> <a class="btn btn-outline-primary" href="{% url 'currency:rates-list' %}">Back to all rates</a>
 	</form>
 
 {% endblock content %}

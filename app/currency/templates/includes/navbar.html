@@ -1,24 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg" style="background-color: #f2f2f2;">
     <div class="container">
         <a class="navbar-brand" href="{% url 'homepage' %}">Currency App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'currency:rates-list' %}">Rates</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'currency:sources-list' %}">Sources</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="{% url 'currency:contact-us-create' %}">Contact Us</a>
+                    <a class="nav-link active" href="{% url 'currency:rates-list' %}">Rates</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'currency:emails-list' %}">Emails</a>
+                    <a class="nav-link active" href="{% url 'currency:sources-list' %}">Sources</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'currency:contact-us-create' %}">Contact Us</a>
+                </li>
+                {% if request.user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'currency:emails-list' %}">Emails</a>
+                </li>
+                {% endif %}
             </ul>
+
+            <ul class="navbar-nav">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Welcome, {{ request.user.email }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'currency:profile' %}">Profile Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+
         </div>
     </div>
 </nav>
