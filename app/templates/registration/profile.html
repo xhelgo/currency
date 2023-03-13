@@ -2,12 +2,11 @@
 {% load django_bootstrap5 %}
 
 {% block title %}
-    Update rate
+    Profile
 {% endblock title %}
 
 {% block content %}
-
-	<h1>Update the rate with id {{ rate.id }}</h1>
+    <h1>Update profile</h1>
 
     <div class="row my-3">
         <div class="col-md-3">
@@ -18,5 +17,9 @@
             </form>
         </div>
     </div>
+
+    <hr>
+    <h2>Password settings</h2>
+    <a class="btn btn-outline-primary mt-2" href="{% url 'password_change' %}">Change password</a>
 
 {% endblock content %}
