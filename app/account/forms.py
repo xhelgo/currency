@@ -21,11 +21,6 @@ class UserSignUpForm(forms.ModelForm):
             'password2'
         )
 
-        labels = {
-            'password1': 'Enter password',
-            'password2': 'Re-enter password'
-        }
-
     def clean(self):
         cleaned_data = super().clean()
 
