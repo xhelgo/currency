@@ -4,6 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
+from settings import settings
 from currency.models import Rate, ContactUs, Source
 from currency.forms import RateForm, SourceForm, ContactUsForm
 
@@ -66,7 +67,7 @@ class ContactUsCreateView(SuccessMessageMixin, CreateView):
 
     def _send_mail(self):
         subject = 'User ContactUs'
-        recipient = 'support@example.com'
+        recipient = settings.DEFAULT_FROM_EMAIL
         message = f'''
                     Request from: {self.object.name}.
                     Reply to email: {self.object.email_from}.
