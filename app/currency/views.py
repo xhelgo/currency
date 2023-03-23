@@ -16,7 +16,7 @@ class RateListView(ListView):
     template_name = 'rates_list.html'
 
     def get_queryset(self):
-        return Rate.objects.all()
+        return Rate.objects.all().select_related('source')
 
 
 class RateDetailView(LoginRequiredMixin, DetailView):
