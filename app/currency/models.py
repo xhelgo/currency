@@ -13,7 +13,7 @@ class Rate(models.Model):
     )
     buy = models.DecimalField(max_digits=6, decimal_places=2)
     sell = models.DecimalField(max_digits=6, decimal_places=2)
-    source = models.CharField(max_length=25)
+    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Currency: {self.get_currency_display()}, Buy: {self.buy} (id: {self.id})'
@@ -38,7 +38,7 @@ class Source(models.Model):
     source_url = models.CharField(max_length=255)
 
     def __str__(self):
-        return f'Source: {self.name}, id: {self.id}'
+        return self.name
 
 
 class RequestResponseLog(models.Model):
