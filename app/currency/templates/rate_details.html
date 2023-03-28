@@ -9,25 +9,26 @@
     <h1>Rate Details</h1>
 
     <table class="table table table-hover table-bordered mt-4">
-        <thead class="table-dark">
-            <td>ID</td>
-            <td>Buy</td>
-            <td>Sell</td>
-            <td>Source</td>
-            <td>Currency</td>
-            <td>Created</td>
+        <thead class="table-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Sell</th>
+                <th scope="col">Source</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Created</th>
+            </tr>
         </thead>
         <tr>
             <td>{{ rate.id }}</td>
             <td>{{ rate.buy }}</td>
             <td>{{ rate.sell }}</td>
-            <td>{{ rate.source }}</td>
+            <td><img src="{{ rate.source.logo.url }}"> {{ rate.source }}</td>
             <td>{{ rate.get_currency_display }}</td>
             <td>{{ rate.created }}</td>
         </tr>
     </table>
 
-    <hr>
-    <a href="{% url 'currency:rates-list' %}">Back to all rates</a><br><br>
+    <a href="{% url 'currency:rates-list' %}" type="button" class="btn btn-outline-primary">Back to all rates</a>
 
 {% endblock content %}

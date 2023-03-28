@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Create Contact Us
@@ -8,14 +8,15 @@
 {% block content %}
     <h1>Contact Us</h1>
 
-    <div class="row my-3">
-        <div class="col-md-6">
-            <form method="post" class="form">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                    <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
+    <form method="post">
+    {% csrf_token %}
+    <div class="col-6">
+        {{ form.name|as_crispy_field }}
+        {{ form.email_from|as_crispy_field }}
+        {{ form.subject|as_crispy_field }}
+        {{ form.message|as_crispy_field }}
     </div>
+    <button type="submit" class="btn btn-primary">Send message</button>
+    </form>
 
 {% endblock content %}

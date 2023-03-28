@@ -13,8 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+
+import settings.settings
 
 from currency.views import IndexView
 
@@ -29,3 +32,5 @@ urlpatterns = [
 
     path('currency/', include('currency.urls'))
 ]
+
+urlpatterns += static(settings.settings.MEDIA_URL, document_root=settings.settings.MEDIA_ROOT)

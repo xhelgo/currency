@@ -1,6 +1,10 @@
+from _decimal import Decimal
+
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from currency.choices import RateCurrencyChoices
+
 
 # Create your models here.
 
@@ -11,8 +15,12 @@ class Rate(models.Model):
         choices=RateCurrencyChoices.choices,
         default=RateCurrencyChoices.USD
     )
-    buy = models.DecimalField(max_digits=6, decimal_places=2)
-    sell = models.DecimalField(max_digits=6, decimal_places=2)
+    buy = models.DecimalField(
+        max_digits=6, decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'), message="Exchange rate can't be smaller than zero")])
+    sell = models.DecimalField(
+        max_digits=6, decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'), message="Exchange rate can't be smaller than zero")])
     source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -36,6 +44,10 @@ class ContactUs(models.Model):
 class Source(models.Model):
     name = models.CharField(max_length=64)
     source_url = models.CharField(max_length=255)
+    logo = models.FileField(
+        default='sources_logos/source-default.svg',
+        upload_to='sources_logos/'
+    )
 
     def __str__(self):
         return self.name

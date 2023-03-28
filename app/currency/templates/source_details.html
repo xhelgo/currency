@@ -9,19 +9,20 @@
     <h1>Rate Details</h1>
 
     <table class="table table-hover table-bordered mt-4">
-        <thead class="table-dark">
-            <td>ID</td>
-            <td>Name</td>
-            <td>URL</td>
+        <thead class="table-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">URL</th>
+            </tr>
         </thead>
         <tr>
             <td>{{ source.id }}</td>
-            <td>{{ source.name }}</td>
+            <td><img src="{{ source.logo.url }}"> {{ source.name }}</td>
             <td><a href="{{ source.source_url }}">{{ source.source_url }}</a></td>
         </tr>
     </table>
 
-    <hr>
-    <a href="{% url 'currency:sources-list' %}">Back to all sources</a><br><br>
+    <a href="{% url 'currency:sources-list' %}" type="button" class="btn btn-outline-primary">Back to all sources</a>
 
 {% endblock content %}

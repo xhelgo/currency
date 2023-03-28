@@ -10,12 +10,14 @@
 {% if not request.user.is_superuser %}
     <p>You don't have access to this page</p>
 {% else %}
-<table class="table table-hover table-bordered mt-4">
-    <thead class="table-dark">
-        <td>ID</td>
-        <td>From</td>
-        <td>Subject</td>
-        <td>Message</td>
+<table class="table table-hover table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">From</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Message</th>
+        </tr>
     </thead>
     {% for email in object_list %}
     <tr>

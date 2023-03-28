@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load django_bootstrap5 %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Create source
@@ -9,14 +9,14 @@
 
 	<h1>Create a new source</h1>
 
-    <div class="row my-3">
-        <div class="col-md-6">
-            <form method="post" class="form">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                <button type="submit" class="btn btn-primary">Create</button>
-            </form>
-        </div>
+    <form method="post">
+    {% csrf_token %}
+    <div class="col-3">
+        {{ form.name|as_crispy_field }}
+        {{ form.source_url|as_crispy_field }}
+        {{ form.logo|as_crispy_field }}
     </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    </form>
 
 {% endblock content %}

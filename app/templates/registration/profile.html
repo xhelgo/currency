@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
+{% load static %}
+
 {% block title %}
     Profile
 {% endblock title %}
@@ -8,9 +10,15 @@
 {% block content %}
     <h1>Update profile</h1>
 
+    {% if object.avatar %}
+        <img src="{{ object.avatar.url }}" height="150">
+    {% else %}
+        <img src="{% static 'default-avatar.png' %}" height="150">
+    {% endif %}
+
     <div class="row my-3">
         <div class="col-md-3">
-            <form method="post" class="form">
+            <form method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form %}
                     <button type="submit" class="btn btn-primary">Update</button>
@@ -20,6 +28,6 @@
 
     <hr>
     <h2>Password settings</h2>
-    <a class="btn btn-outline-primary mt-2" href="{% url 'password_change' %}">Change password</a>
+    <a class="btn btn-outline-primary mt-2 mb-4" href="{% url 'password_change' %}">Change password</a>
 
 {% endblock content %}

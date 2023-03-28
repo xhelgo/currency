@@ -1,28 +1,35 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Currency - {% block title %} {% endblock title %}</title>
+    <title>Tracky – {% block title %} {% endblock title %}</title>
 
     {% load django_bootstrap5 %}
 
     {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'styles/custom.css' %}">
 
     {% bootstrap_javascript %}
 
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.svg' %}"/>
+
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 {% include 'includes/navbar.html' %}
 
-<div class="container mt-4">
+<div class="container mt-4 mb-4">
 
 {% bootstrap_messages %}
 
 {% block content %}
 {% endblock content %}
 </div>
+
+{% include 'includes/footer.html' %}
 
 </body>
 </html>

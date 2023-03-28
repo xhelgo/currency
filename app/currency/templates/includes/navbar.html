@@ -1,6 +1,9 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #f2f2f2;">
+{% load static %}
+<nav class="navbar navbar-expand-lg" style="background-color: #f5f7ff;">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'homepage' %}">Currency App</a>
+        <a class="navbar-brand" href="{% url 'homepage' %}">
+            <img style="height:40px" src="{% static 'Tracky_logo.svg' %}">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,7 +32,7 @@
                             Welcome, {{ request.user.email }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'currency:profile' %}">Profile Settings</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account:profile' %}">Profile Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                         </ul>

@@ -1,11 +1,33 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
-    Index
+    Homepage
 {% endblock title %}
 
 {% block content %}
 
-Hello from INDEX
+    <section class="hero">
+                <div class="row align-items-center">
+                    <div class="col-md-6 hero-text">
+                        <h1 class="mb-3">Meet Tracky — Exchange Rates Monitoring App</h1>
+                        <p>Tracky is an exchange rates monitoring app that helps you keep track of currency exchange
+                            rates in real-time. With Tracky, you can easily monitor the exchange rates of your favorite
+                            currencies and get notified when they reach a certain level. Whether you’re a traveler, a
+                            business owner, or just someone who wants to stay up-to-date with the latest exchange rates,
+                            Tracky has got you covered.</p>
+                        {% if not request.user.is_authenticated %}
+                            <a class="btn btn-primary" href="{% url 'account:signup' %}">Sign Up</a>
+                            <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+                        {% else %}
+                            <a class="btn btn-primary btn-lg" href="{% url 'currency:rates-list' %}">Browse Rates</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{% static 'Hero-illustration.png' %}" height="700">
+                    </div>
+                </div>
+        </section>
 
 {% endblock content %}
