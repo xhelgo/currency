@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
@@ -126,17 +125,3 @@ class SourceDeleteView(SuccessMessageMixin, DeleteView):
 
 class IndexView(TemplateView):
     template_name = 'index.html'
-
-
-class ProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    template_name = 'registration/profile.html'
-    success_url = reverse_lazy('currency:profile')
-    success_message = 'Your profile was updated successfully'
-    queryset = get_user_model().objects.all()
-    fields = (
-        'first_name',
-        'last_name'
-    )
-
-    def get_object(self, queryset=None):
-        return self.request.user
