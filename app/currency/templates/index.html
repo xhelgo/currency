@@ -9,25 +9,27 @@
 {% block content %}
 
     <section class="hero">
-                <div class="row align-items-center">
-                    <div class="col-md-6 hero-text">
-                        <h1 class="mb-3">Meet Tracky — Exchange Rates Monitoring App</h1>
-                        <p>Tracky is an exchange rates monitoring app that helps you keep track of currency exchange
-                            rates in real-time. With Tracky, you can easily monitor the exchange rates of your favorite
-                            currencies and get notified when they reach a certain level. Whether you’re a traveler, a
-                            business owner, or just someone who wants to stay up-to-date with the latest exchange rates,
-                            Tracky has got you covered.</p>
-                        {% if not request.user.is_authenticated %}
-                            <a class="btn btn-primary" href="{% url 'account:signup' %}">Sign Up</a>
-                            <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
-                        {% else %}
-                            <a class="btn btn-primary btn-lg" href="{% url 'currency:rates-list' %}">Browse Rates</a>
-                        {% endif %}
-                    </div>
-                    <div class="col-md-6">
-                        <img src="{% static 'Hero-illustration.png' %}" height="700">
-                    </div>
+        <div class="container-fluid">
+            <div class="d-md-flex align-items-start align-items-md-center">
+                <div class="col-md-6 col-12 hero-text">
+                    <h1 class="mb-3">Meet <span class="name">Tracky</span> — Exchange Rates Monitoring App</h1>
+                    <p>Tracky is an exchange rates monitoring app that helps you keep track of currency exchange
+                        rates in real-time. With Tracky, you can easily monitor the exchange rates of your favorite
+                        currencies and get notified when they reach a certain level. Whether you’re a traveler, a
+                        business owner, or just someone who wants to stay up-to-date with the latest exchange rates,
+                        Tracky has got you covered.</p>
+                    {% if not request.user.is_authenticated %}
+                        <a class="btn btn-primary" href="{% url 'account:signup' %}">Sign Up</a>
+                        <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+                    {% else %}
+                        <a class="btn btn-primary btn-lg" href="{% url 'currency:rates-list' %}">Browse Rates</a>
+                    {% endif %}
                 </div>
-        </section>
+                <div class="col-md-6 col-0">
+                    <img class="hero-image" src="{% static 'Hero-illustration.png' %}" height="700">
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock content %}

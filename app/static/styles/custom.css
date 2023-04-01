@@ -39,4 +39,69 @@
     line-height: 1.5;
 }
 
-.hero p
+.hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 54px;
+}
+
+.hero p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-image {
+        width: 105%;
+  }
+    .hero h1 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero-image {
+        display: none;
+    }
+    .hero h1 {
+        font-size: 40px;
+        margin-top: 100px;
+    }
+}
+
+.name {
+  --bg-size: 400%;
+  --color-one: #3864ff;
+  --color-two: #9bb1ff;
+  background: linear-gradient(
+      90deg,
+      var(--color-one),
+      var(--color-two),
+      var(--color-one)
+    )
+    0 0 / var(--bg-size) 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .name {
+    animation: move-bg 8s linear infinite;
+  }
+  @keyframes move-bg {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+}

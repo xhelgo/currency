@@ -23,6 +23,9 @@ class Rate(models.Model):
         validators=[MinValueValidator(Decimal('0.01'), message="Exchange rate can't be smaller than zero")])
     source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ('-created', )
+
     def __str__(self):
         return f'Currency: {self.get_currency_display()}, Buy: {self.buy} (id: {self.id})'
 
@@ -43,6 +46,7 @@ class ContactUs(models.Model):
 
 class Source(models.Model):
     name = models.CharField(max_length=64)
+    code_name = models.CharField(max_length=64, unique=True)
     source_url = models.CharField(max_length=255)
     logo = models.FileField(
         default='sources_logos/source-default.svg',
