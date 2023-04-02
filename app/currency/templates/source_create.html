@@ -11,7 +11,7 @@
 
     <form method="post">
         {% csrf_token %}
-        <div class="col-3">
+        <div class="col-md-6 col-lg-3">
             {{ form.name|as_crispy_field }}
             {{ form.source_url|as_crispy_field }}
             {{ form.logo|as_crispy_field }}

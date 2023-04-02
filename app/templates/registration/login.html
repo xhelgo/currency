@@ -13,8 +13,8 @@
             <form method="post" class="form">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <a class="btn btn-outline-primary" href="{% url 'password_reset' %}">Forgot password?</a>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <a class="btn btn-outline-primary" href="{% url 'password_reset' %}">Forgot password?</a>
             </form>
         </div>
     </div>

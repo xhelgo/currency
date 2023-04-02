@@ -10,7 +10,7 @@
 
     <form method="post">
         {% csrf_token %}
-        <div class="col-6">
+        <div class="col-md-9 col-lg-6">
             {{ form.name|as_crispy_field }}
             {{ form.email_from|as_crispy_field }}
             {{ form.subject|as_crispy_field }}

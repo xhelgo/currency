@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.forms import ClearableFileInput
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, RedirectView, UpdateView
@@ -22,6 +23,9 @@ class ProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         'last_name',
         'avatar'
     )
+    widgets = {
+        'avatar': ClearableFileInput()
+    }
 
     def get_object(self, queryset=None):
         return self.request.user

@@ -16,7 +16,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-
+    border-radius: 0.2em;
 }
 
 .btn svg {
@@ -82,9 +82,31 @@
     }
 }
 
+p, .text-muted, a.btn {
+    font-family: 'Poppins', sans-serif;
+}
+
 .page-heading {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    font-size: 200%;
+}
+
+.page-subheading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 150%;
+}
+
+.form-label, .requiredField {
+    color: dimgrey;
+    margin-bottom: 5px;
+}
+
+.form-control, .form-select {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    border-radius: 0.2em;
 }
 
 .name {
