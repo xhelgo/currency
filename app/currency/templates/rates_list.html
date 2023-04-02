@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-6">
-            <h1>Rates</h1>
+            <h1 class="page-heading">Rates</h1>
         </div>
         <div class="col-6 d-flex align-items-end justify-content-end">
             <a class="btn btn-outline-primary mb-3" href="{% url 'currency:rate-create' %}" role="button">
@@ -20,47 +20,51 @@
         </div>
     </div>
 
-    <table class="table table-hover table-bordered align-middle">
-        <thead class="table-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">ID</th>
-                <th scope="col">Buy rate</th>
-                <th scope="col">Sell rate</th>
-                <th scope="col">Currency</th>
-                <th scope="col">Source</th>
-                {% if request.user.is_authenticated %}
-                    <th scope="col">Actions</th>
-                {% endif %}
-            </tr>
-        </thead>
-        {% for rate in object_list %}
-        <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ rate.id }}</td>
-            <td>{{ rate.buy }}</td>
-            <td>{{ rate.sell }}</td>
-            <td>{{ rate.get_currency_display }}</td>
-            <td><img src="{{ rate.source.logo.url }}"> {{ rate.source }}</td>
-            {% if request.user.is_authenticated %}
-            <td>
-                <div class="btn-group">
-                  <a type="button" class="btn btn-primary btn-sm" href="{% url 'currency:rate-details' rate.id %}">Details</a>
-                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                  </button>
-                    {% if request.user.is_superuser %}
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'currency:rate-details' rate.id %}">Details</a></li>
-                        <li><a class="dropdown-item" href="{% url 'currency:rate-update' rate.id %}">Update</a></li>
-                        <li><a class="dropdown-item" href="{% url 'currency:rate-delete' rate.id %}">Delete</a></li>
-                      </ul>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle text-nowrap">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Buy rate</th>
+                    <th scope="col">Sell rate</th>
+                    <th scope="col">Currency</th>
+                    <th scope="col">Source</th>
+                    {% if request.user.is_authenticated %}
+                        <th scope="col">Actions</th>
                     {% endif %}
-                </div>
-            </td>
-            {% endif %}
-        </tr>
-        {% endfor %}
-    </table>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rate in object_list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ rate.id }}</td>
+                    <td>{{ rate.buy }}</td>
+                    <td>{{ rate.sell }}</td>
+                    <td>{{ rate.get_currency_display }}</td>
+                    <td><img src="{{ rate.source.logo.url }}"> {{ rate.source }}</td>
+                    {% if request.user.is_authenticated %}
+                    <td>
+                        <div class="btn-group">
+                          <a type="button" class="btn btn-primary btn-sm" href="{% url 'currency:rate-details' rate.id %}">Details</a>
+                          <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                          </button>
+                            {% if request.user.is_superuser %}
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'currency:rate-details' rate.id %}">Details</a></li>
+                                <li><a class="dropdown-item" href="{% url 'currency:rate-update' rate.id %}">Update</a></li>
+                                <li><a class="dropdown-item" href="{% url 'currency:rate-delete' rate.id %}">Delete</a></li>
+                              </ul>
+                            {% endif %}
+                        </div>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock content %}
