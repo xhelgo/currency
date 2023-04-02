@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, RedirectView, UpdateView
 
@@ -27,6 +28,12 @@ class ProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class UserSignUpView(SuccessMessageMixin, CreateView):
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('homepage')
+        return super(UserSignUpView, self).dispatch(request, *args, **kwargs)
+
     queryset = get_user_model().objects.all()
     template_name = 'signup.html'
     success_url = reverse_lazy('homepage')

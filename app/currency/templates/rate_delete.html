@@ -6,11 +6,12 @@
 
 {% block content %}
 
-	<p>Do you really want to delete the rate with id {{ rate.id }}?</p>
+    <p>Do you really want to delete the rate with id {{ rate.id }}?</p>
 
-	<form method="post">
-		{% csrf_token %}
-		<button type="submit" class="btn btn-danger">Yes, delete</button> <a class="btn btn-outline-primary" href="{% url 'currency:rates-list' %}">Back to all rates</a>
-	</form>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a class="btn btn-outline-primary" href="{% url 'currency:rates-list' %}">Back to all rates</a>
+    </form>
 
 {% endblock content %}

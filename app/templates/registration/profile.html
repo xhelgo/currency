@@ -11,7 +11,7 @@
     <h1 class="page-heading">Update profile</h1>
 
     {% if object.avatar %}
-        <img src="{{ object.avatar.url }}" height="150">
+        <img src="{{ object.avatar.url }}" class="profile-avatar" height="150">
     {% else %}
         <img src="{% static 'default-avatar.png' %}" height="150">
     {% endif %}

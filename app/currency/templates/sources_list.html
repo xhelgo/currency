@@ -12,7 +12,8 @@
         </div>
         <div class="col-6 d-flex align-items-end justify-content-end">
             <a class="btn btn-outline-primary mb-3" href="{% url 'currency:source-create' %}" role="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-plus-square-fill" viewBox="0 0 16 16">
                     <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"></path>
                 </svg>
                 Create a new source
@@ -23,38 +24,43 @@
     <div class="table-responsive">
         <table class="table table-hover table-bordered align-middle text-nowrap">
             <thead class="table-light">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">URL</th>
-                    {% if request.user.is_authenticated %}
-                        <th scope="col">Actions</th>
-                    {% endif %}
-                </tr>
-            </thead>
-            {% for source in object_list %}
             <tr>
-                <td>{{ source.id }}</td>
-                <td><img src="{{ source.logo.url }}" width="24"> {{ source.name }}</td>
-                <td><a href="{{ source.source_url }}">{{ source.source_url }}</a></td>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">URL</th>
                 {% if request.user.is_authenticated %}
-                    <td>
-                    <div class="btn-group">
-                      <a type="button" class="btn btn-primary btn-sm" href="{% url 'currency:source-details' source.id %}">Details</a>
-                      <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                      </button>
-                        {% if request.user.is_superuser %}
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'currency:source-details' source.id %}">Details</a></li>
-                            <li><a class="dropdown-item" href="{% url 'currency:source-update' source.id %}">Update</a></li>
-                            <li><a class="dropdown-item" href="{% url 'currency:source-delete' source.id %}">Delete</a></li>
-                          </ul>
-                        {% endif %}
-                    </div>
-                    </td>
+                    <th scope="col">Actions</th>
                 {% endif %}
             </tr>
+            </thead>
+            {% for source in object_list %}
+                <tr>
+                    <td>{{ source.id }}</td>
+                    <td><img src="{{ source.logo.url }}" width="24"> {{ source.name }}</td>
+                    <td><a href="{{ source.source_url }}">{{ source.source_url }}</a></td>
+                    {% if request.user.is_authenticated %}
+                        <td>
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-primary btn-sm"
+                                   href="{% url 'currency:source-details' source.id %}">Details</a>
+                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item"
+                                           href="{% url 'currency:source-details' source.id %}">Details</a></li>
+                                    {% if request.user.is_superuser %}
+                                        <li><a class="dropdown-item"
+                                               href="{% url 'currency:source-update' source.id %}">Update</a></li>
+                                        <li><a class="dropdown-item"
+                                               href="{% url 'currency:source-delete' source.id %}">Delete</a></li>
+                                        </ul>
+                                    {% endif %}
+                            </div>
+                        </td>
+                    {% endif %}
+                </tr>
             {% endfor %}
         </table>
     </div>

@@ -7,16 +7,16 @@
 
 {% block content %}
 
-	<h1 class="page-heading">Create a new source</h1>
+    <h1 class="page-heading">Create a new source</h1>
 
     <form method="post">
-    {% csrf_token %}
-    <div class="col-3">
-        {{ form.name|as_crispy_field }}
-        {{ form.source_url|as_crispy_field }}
-        {{ form.logo|as_crispy_field }}
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+        {% csrf_token %}
+        <div class="col-3">
+            {{ form.name|as_crispy_field }}
+            {{ form.source_url|as_crispy_field }}
+            {{ form.logo|as_crispy_field }}
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
     </form>
 
 {% endblock content %}

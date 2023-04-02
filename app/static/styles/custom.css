@@ -1,18 +1,15 @@
-.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-outline-primary:hover,
-.btn-outline-primary:active, .btn-outline-primary:visited {
-    background-color: #3864ff !important;
+.btn-primary, .btn-primary:active, .btn-primary:visited,
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:visited,
+.dropdown-item:active {
+    background-color: #3864ff;
 }
 
 .btn-outline-primary {
-    outline-color: #3864ff; !important;
+    outline-color: #3864ff;
 }
 
 .btn-primary:hover {
-    background-color: #2c4fcc !important;
-}
-
-.dropdown-link-active-bg {
-    background-color: #3864ff; !important;
+    background-color: #2c4fcc;
 }
 
 .btn {
@@ -23,19 +20,23 @@
 }
 
 .btn svg {
-  margin-right: 5px;
+    margin-right: 5px;
+}
+
+.navbar-avatar, .profile-avatar {
+    border-radius: 50%;
 }
 
 .hero {
-	display: flex;
-	align-items: center;
-	box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .hero-text {
-	flex-basis: 50%;
-	padding-right: 5%;
-	box-sizing: border-box;
+    flex-basis: 50%;
+    padding-right: 5%;
+    box-sizing: border-box;
     line-height: 1.5;
 }
 
@@ -63,7 +64,8 @@
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     .hero-image {
         width: 105%;
-  }
+    }
+
     .hero h1 {
         font-size: 40px;
     }
@@ -73,6 +75,7 @@
     .hero-image {
         display: none;
     }
+
     .hero h1 {
         font-size: 40px;
         margin-top: 100px;
@@ -93,8 +96,7 @@
             var(--color-one),
             var(--color-two),
             var(--color-one)
-    )
-    0 0 / var(--bg-size) 100%;
+    ) 0 0 / var(--bg-size) 100%;
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
@@ -104,6 +106,7 @@
     .name {
         animation: move-bg 8s linear infinite;
     }
+
     @keyframes move-bg {
         to {
             background-position: var(--bg-size) 0;
