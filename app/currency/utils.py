@@ -24,18 +24,7 @@ def parse_rates(url: str) -> list:
     return rates
 
 
-def get_last_rate(currency_code, source, available_currency):
-    last_rate = Rate.objects.filter(
-        currency=available_currency[currency_code],
-        source=source
-    ) \
-        .first()
-
-    return last_rate
-
-
-def create_rate(rate_data, source, available_currency):
-    last_rate = get_last_rate(rate_data["currency"], source, available_currency)
+def create_rate(last_rate, rate_data, source, available_currency):
     if last_rate is None or last_rate.buy != rate_data["buy"] or last_rate.sell != rate_data["sell"]:
         Rate.objects.create(
             buy=rate_data["buy"],

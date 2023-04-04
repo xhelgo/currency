@@ -3,6 +3,7 @@ from django.conf import settings
 
 from currency.choices import RateCurrencyChoices
 from currency.constants import PRIVATBANK_CODE_NAME, MONOBANK_CODE_NAME, OSHCHADBANK_CODE_NAME
+from currency.models import Rate
 from currency.utils import round_to_2_places_decimal, parse_rates, create_rate, parse_oshchad_rates
 
 
@@ -49,7 +50,13 @@ def parse_privatbank():
             "currency": rate['ccy']
         }
 
-        create_rate(rate_data, source, available_currency)
+        last_rate = Rate.objects.filter(
+            currency=available_currency[rate_data['currency']],
+            source=source
+        ) \
+            .first()
+
+        create_rate(last_rate, rate_data, source, available_currency)
 
 
 @shared_task
@@ -81,7 +88,13 @@ def parse_monobank():
                 "currency": rate['currencyCodeA']
             }
 
-            create_rate(rate_data, source, available_currency)
+            last_rate = Rate.objects.filter(
+                currency=available_currency[rate_data['currency']],
+                source=source
+            ) \
+                .first()
+
+            create_rate(last_rate, rate_data, source, available_currency)
 
 
 @shared_task
@@ -116,4 +129,10 @@ def parse_oshchad():
             "currency": rate['Код']
         }
 
-        create_rate(rate_data, source, available_currency)
+        last_rate = Rate.objects.filter(
+            currency=available_currency[rate_data['currency']],
+            source=source
+        ) \
+            .first()
+
+        create_rate(last_rate, rate_data, source, available_currency)
