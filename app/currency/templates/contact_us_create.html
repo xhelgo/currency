@@ -6,17 +6,17 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Contact Us</h1>
+    <h1 class="page-heading">Contact Us</h1>
 
     <form method="post">
-    {% csrf_token %}
-    <div class="col-6">
-        {{ form.name|as_crispy_field }}
-        {{ form.email_from|as_crispy_field }}
-        {{ form.subject|as_crispy_field }}
-        {{ form.message|as_crispy_field }}
-    </div>
-    <button type="submit" class="btn btn-primary">Send message</button>
+        {% csrf_token %}
+        <div class="col-md-9 col-lg-6">
+            {{ form.name|as_crispy_field }}
+            {{ form.email_from|as_crispy_field }}
+            {{ form.subject|as_crispy_field }}
+            {{ form.message|as_crispy_field }}
+        </div>
+        <button type="submit" class="btn btn-primary">Send message</button>
     </form>
 
 {% endblock content %}

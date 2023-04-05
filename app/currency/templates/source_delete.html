@@ -6,11 +6,12 @@
 
 {% block content %}
 
-	<p>Do you really want to delete the source with id {{ source.id }}?</p>
+    <p>Do you really want to delete the source with id {{ source.id }}?</p>
 
-	<form method="post">
-		{% csrf_token %}
-		<button type="submit" class="btn btn-danger">Yes, delete</button> <a class="btn btn-outline-primary" href="{% url 'currency:sources-list' %}">Back to all sources</a>
-	</form>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a class="btn btn-outline-primary" href="{% url 'currency:sources-list' %}">Back to all sources</a>
+    </form>
 
 {% endblock content %}

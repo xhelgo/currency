@@ -3,7 +3,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
-from settings import settings
 from currency.models import Rate, ContactUs, Source
 from currency.forms import RateForm, SourceForm, ContactUsForm
 
@@ -66,22 +65,14 @@ class ContactUsCreateView(SuccessMessageMixin, CreateView):
 
     def _send_mail(self):
         subject = 'User ContactUs'
-        recipient = settings.DEFAULT_FROM_EMAIL
         message = f'''
                     Request from: {self.object.name}.
                     Reply to email: {self.object.email_from}.
                     Subject: {self.object.subject}.
                     Body: {self.object.message}.
                 '''
-
-        from django.core.mail import send_mail
-        send_mail(
-            subject,
-            message,
-            recipient,
-            [recipient],
-            fail_silently=False,
-        )
+        from currency.tasks import send_mail
+        send_mail.delay(subject, message)
 
     def form_valid(self, form):
         redirect = super().form_valid(form)

@@ -6,15 +6,15 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Login</h1>
+    <h1 class="page-heading">Login</h1>
 
     <div class="row my-3">
         <div class="col-md-3">
             <form method="post" class="form">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <a class="btn btn-outline-primary" href="{% url 'password_reset' %}">Forgot password?</a>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <a class="btn btn-outline-primary" href="{% url 'password_reset' %}">Forgot password?</a>
             </form>
         </div>
     </div>

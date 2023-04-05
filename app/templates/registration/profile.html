@@ -8,26 +8,45 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Update profile</h1>
+    <h1 class="page-heading">Update profile</h1>
+    <p class="mb-1 text-muted">Change your profile settings</p>
 
-    {% if object.avatar %}
-        <img src="{{ object.avatar.url }}" height="150">
-    {% else %}
-        <img src="{% static 'default-avatar.png' %}" height="150">
-    {% endif %}
-
-    <div class="row my-3">
-        <div class="col-md-3">
+    <div class="row my-12">
+        <div class="">
             <form method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% bootstrap_form form %}
-                    <button type="submit" class="btn btn-primary">Update</button>
+                <h2 class="page-subheading mt-4 mb-3">Change avatar</h2>
+                <div class="d-inline-flex align-items-end">
+                    <div class="col-sm-4">
+                        {% if object.avatar %}
+                            <img src="{{ object.avatar.url }}" class="profile-avatar mb-3" height="160">
+                        {% else %}
+                            <img src="{% static 'default-avatar.png' %}" class="mb-3" height="160">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="mb-3">
+                            {#<label for="avatar" class="form-label">Avatar</label>#}
+                            <input type="file" class="form-control" id="id_avatar" aria-describedby="nameHelp">
+                            <div id="nameHelp" class="form-text">Best size for photo is 256×256px.</div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="id_avatar-clear_id">
+                                <label class="form-check-label" for="id_avatar-clear_id">Remove profile picture</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="page-subheading mt-4">Change Personal Information</h2>
+                <div class="col-xl-4 col-md-6 col-sm-12">
+                    {% bootstrap_field form.first_name %}
+                    {% bootstrap_field form.last_name %}
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>
 
-    <hr>
-    <h2>Password settings</h2>
-    <a class="btn btn-outline-primary mt-2 mb-4" href="{% url 'password_change' %}">Change password</a>
+    <h2 class="page-subheading mt-4">Password settings</h2>
+    <a class="btn btn-outline-primary mt-1 mb-4" href="{% url 'password_change' %}">Change password</a>
 
 {% endblock content %}

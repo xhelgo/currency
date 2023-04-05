@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 
 import settings.settings
 
@@ -23,6 +24,7 @@ from currency.views import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
     path('auth/', include('django.contrib.auth.urls')),
     path('account/', include('account.urls')),
 

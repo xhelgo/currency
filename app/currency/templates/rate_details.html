@@ -6,24 +6,24 @@
 
 {% block content %}
 
-    <h1>Rate Details</h1>
+    <h1 class="page-heading">Rate Details</h1>
 
     <table class="table table table-hover table-bordered mt-4">
         <thead class="table-light">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Buy</th>
-                <th scope="col">Sell</th>
-                <th scope="col">Source</th>
-                <th scope="col">Currency</th>
-                <th scope="col">Created</th>
-            </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Buy</th>
+            <th scope="col">Sell</th>
+            <th scope="col">Source</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Created</th>
+        </tr>
         </thead>
         <tr>
             <td>{{ rate.id }}</td>
             <td>{{ rate.buy }}</td>
             <td>{{ rate.sell }}</td>
-            <td><img src="{{ rate.source.logo.url }}"> {{ rate.source }}</td>
+            <td><img src="{{ rate.source.logo.url }}"> <a href="{% url 'currency:source-details' rate.source.id %}"> {{ rate.source }}</a></td>
             <td>{{ rate.get_currency_display }}</td>
             <td>{{ rate.created }}</td>
         </tr>
