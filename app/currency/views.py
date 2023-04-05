@@ -1,8 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.utils.http import urlencode
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django_filters.views import FilterView
 
+from currency.filters import RateFilter, EmailsFilter
 from currency.models import Rate, ContactUs, Source
 from currency.forms import RateForm, SourceForm, ContactUsForm
 
@@ -10,11 +13,20 @@ from currency.forms import RateForm, SourceForm, ContactUsForm
 # Create your views here.
 
 
-class RateListView(ListView):
+class RateListView(FilterView):
     template_name = 'rates_list.html'
+    paginate_by = 10
+    filterset_class = RateFilter
 
     def get_queryset(self):
         return Rate.objects.all().select_related('source')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query_params = {key: value for key, value in self.request.GET.items() if
+                        key != 'page' and value}
+        context['filter_pagination'] = urlencode(query_params)
+        return context
 
 
 class RateDetailView(LoginRequiredMixin, DetailView):
@@ -50,8 +62,10 @@ class RateDeleteView(UserPassesTestMixin, SuccessMessageMixin, DeleteView):
         return self.request.user.is_superuser
 
 
-class EmailListView(ListView):
+class EmailListView(FilterView):
     template_name = 'emails_list.html'
+    paginate_by = 10
+    filterset_class = EmailsFilter
 
     def get_queryset(self):
         return ContactUs.objects.all()

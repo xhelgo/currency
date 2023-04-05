@@ -1,10 +1,11 @@
 .btn-primary, .btn-primary:active, .btn-primary:visited,
 .btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:visited,
-.dropdown-item:active {
+.dropdown-item:active,
+.active .page-link {
     background-color: #3864ff;
 }
 
-.btn-outline-primary {
+.btn-primary, .btn-outline-primary, .btn-outline-primary:visited {
     outline-color: #3864ff;
 }
 
@@ -21,6 +22,20 @@
 
 .btn svg {
     margin-right: 5px;
+}
+
+.pagination .page-item:first-child .page-link {
+    border-top-left-radius: 0.2em;
+    border-bottom-left-radius: 0.2em;
+}
+
+.pagination .page-item:last-child .page-link {
+    border-top-right-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+}
+
+a, .page-link {
+    color: #3864ff;
 }
 
 .navbar-avatar, .profile-avatar {
@@ -43,7 +58,7 @@
 .hero h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 54px;
+    font-size: 50px;
 }
 
 .hero p {
@@ -78,29 +93,28 @@
 
     .hero h1 {
         font-size: 40px;
-        margin-top: 100px;
+        margin-top: 10vh;
     }
 }
 
-p, .text-muted, a.btn {
+p, .text-muted, a.btn, .form-label {
     font-family: 'Poppins', sans-serif;
 }
 
 .page-heading {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 200%;
 }
 
 .page-subheading {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 150%;
 }
 
 .form-label, .requiredField {
     color: dimgrey;
     margin-bottom: 5px;
+    font-size: 90%;
 }
 
 .form-control, .form-select {
