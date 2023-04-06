@@ -18,15 +18,6 @@ class ProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Your profile was updated successfully'
     queryset = get_user_model().objects.all()
     form_class = UserProfileForm
-    # fields = (
-    #     'first_name',
-    #     'last_name',
-    #     'avatar',
-    #     'phone'
-    # )
-    # widgets = {
-    #     'avatar': ClearableFileInput()
-    # }
 
     def get_object(self, queryset=None):
         return self.request.user
