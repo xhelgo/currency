@@ -40,6 +40,7 @@
                 <div class="col-xl-4 col-md-6 col-sm-12">
                     {% bootstrap_field form.first_name %}
                     {% bootstrap_field form.last_name %}
+                    {% bootstrap_field form.phone %}
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
@@ -48,5 +49,11 @@
 
     <h2 class="page-subheading mt-4">Password settings</h2>
     <a class="btn btn-outline-primary mt-1 mb-4" href="{% url 'password_change' %}">Change password</a>
+
+    <script>
+        $(document).ready(function () {
+            $('input[data-mask]').mask($('input[data-mask]').attr('data-mask'));
+        });
+    </script>
 
 {% endblock content %}

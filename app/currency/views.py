@@ -9,11 +9,13 @@ from currency.filters import RateFilter, EmailsFilter
 from currency.models import Rate, ContactUs, Source
 from currency.forms import RateForm, SourceForm, ContactUsForm
 
+from currency.mixins import MyPaginatorMixin
+
 
 # Create your views here.
 
 
-class RateListView(FilterView):
+class RateListView(MyPaginatorMixin, FilterView):
     template_name = 'rates_list.html'
     paginate_by = 10
     filterset_class = RateFilter
@@ -62,7 +64,7 @@ class RateDeleteView(UserPassesTestMixin, SuccessMessageMixin, DeleteView):
         return self.request.user.is_superuser
 
 
-class EmailListView(FilterView):
+class EmailListView(MyPaginatorMixin, FilterView):
     template_name = 'emails_list.html'
     paginate_by = 10
     filterset_class = EmailsFilter

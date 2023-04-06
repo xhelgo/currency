@@ -14,24 +14,24 @@
 
 <script>
 
-// Select the button element
-let button = $('#dropdownMenuButton');
+    // Select the button element
+    let button = $('#dropdownMenuButton');
 
-// Toggle the dropdown menu on click
-button.on('click', function (e) {
-  e.preventDefault();
-  button.dropdown('toggle');
-});
+    // Toggle the dropdown menu on click
+    button.on('click', function (e) {
+        e.preventDefault();
+        button.dropdown('toggle');
+    });
 
-// Hide the dropdown menu on click outside
-document.addEventListener('click', function (e) {
-  // Get the clicked element
-    let clicked = $(e.target);
-    // If the clicked element is not the button or the menu or its children
-  if (!clicked.is('#dropdownMenuButton') && !clicked.is('.dropdown-menu') && !clicked.closest('.dropdown-menu').length) {
-    // Hide the dropdown
-    button.dropdown('hide');
-  }
-});
+    // Hide the dropdown menu on click outside
+    document.addEventListener('click', function (e) {
+        // Get the clicked element
+        let clicked = $(e.target);
+        // If the clicked element is not the button or the menu or its children
+        if (!clicked.is('#dropdownMenuButton') && !clicked.is('.dropdown-menu') && !clicked.closest('.dropdown-menu').length) {
+            // Hide the dropdown
+            button.dropdown('hide');
+        }
+    });
 
 </script>
