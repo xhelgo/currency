@@ -11,7 +11,7 @@
     <h1 class="page-heading">Update profile</h1>
     <p class="mb-1 text-muted">Change your profile settings</p>
 
-    <div class="row my-12">
+    <div class="row">
         <div class="">
             <form method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -19,9 +19,9 @@
                 <div class="d-inline-flex align-items-end">
                     <div class="col-sm-4">
                         {% if object.avatar %}
-                            <img src="{{ object.avatar.url }}" class="profile-avatar mb-3" height="160">
+                            <img src="{{ object.avatar.url }}" class="profile-avatar me-2 mb-3" height="160">
                         {% else %}
-                            <img src="{% static 'default-avatar.png' %}" class="mb-3" height="160">
+                            <img src="{% static 'default-avatar.png' %}" class="img-fluid me-2 mb-3" height="160">
                         {% endif %}
                     </div>
                     <div class="col-md-6 col-lg-6">

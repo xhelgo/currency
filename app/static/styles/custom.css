@@ -42,16 +42,7 @@ a, .page-link {
     border-radius: 50%;
 }
 
-.hero {
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-}
-
 .hero-text {
-    flex-basis: 50%;
-    padding-right: 5%;
-    box-sizing: border-box;
     line-height: 1.5;
 }
 
@@ -68,32 +59,17 @@ a, .page-link {
     line-height: 1.65;
 }
 
-.hero-image {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    overflow: hidden;
-}
-
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-    .hero-image {
-        width: 105%;
-    }
-
     .hero h1 {
         font-size: 40px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .hero-image {
-        display: none;
-    }
-
     .hero h1 {
         font-size: 40px;
-        margin-top: 10vh;
+        /*margin-top: 10vh;*/
     }
 }
 
