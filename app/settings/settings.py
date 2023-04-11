@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
     'rangefilter',
+    'django_filters',
     'django_bootstrap5',
     'crispy_forms',
     'crispy_bootstrap5',

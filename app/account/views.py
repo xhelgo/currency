@@ -2,12 +2,11 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.forms import ClearableFileInput
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, RedirectView, UpdateView
 
-from account.forms import UserSignUpForm
+from account.forms import UserSignUpForm, UserProfileForm
 
 
 # Create your views here.
@@ -18,14 +17,7 @@ class ProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('account:profile')
     success_message = 'Your profile was updated successfully'
     queryset = get_user_model().objects.all()
-    fields = (
-        'first_name',
-        'last_name',
-        'avatar'
-    )
-    widgets = {
-        'avatar': ClearableFileInput()
-    }
+    form_class = UserProfileForm
 
     def get_object(self, queryset=None):
         return self.request.user

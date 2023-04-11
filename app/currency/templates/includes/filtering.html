@@ -1,0 +1,37 @@
+{% load crispy_forms_tags %}
+
+<div class="filter">
+    <form method="get">
+        <button type="button" class="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton">
+            Filter
+        </button>
+        <div class="dropdown-menu filter-menu" style="width: 200px; padding: 10px">
+            {{ filter.form|crispy }}
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    // Select the button element
+    let button = $('#dropdownMenuButton');
+
+    // Toggle the dropdown menu on click
+    button.on('click', function (e) {
+        e.preventDefault();
+        button.dropdown('toggle');
+    });
+
+    // Hide the dropdown menu on click outside
+    document.addEventListener('click', function (e) {
+        // Get the clicked element
+        let clicked = $(e.target);
+        // If the clicked element is not the button or the menu or its children
+        if (!clicked.is('#dropdownMenuButton') && !clicked.is('.dropdown-menu') && !clicked.closest('.dropdown-menu').length) {
+            // Hide the dropdown
+            button.dropdown('hide');
+        }
+    });
+
+</script>

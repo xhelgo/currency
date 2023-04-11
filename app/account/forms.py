@@ -62,3 +62,20 @@ class UserSignUpForm(forms.ModelForm):
         redirect = super().form_valid(form)
         self._send_mail()
         return redirect
+
+
+class UserProfileForm(forms.ModelForm):
+    phone = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'data-mask': "(000) 00-000-0000", 'placeholder': "(380) 97-977-9977"}),
+        label='Phone number',
+    )
+
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'avatar',
+            'phone'
+        )
