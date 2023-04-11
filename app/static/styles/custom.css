@@ -73,7 +73,7 @@ a, .page-link {
     }
 }
 
-p, .text-muted, a.btn, .form-label {
+p, .text-muted, a.btn, .form-label, .link-font {
     font-family: 'Poppins', sans-serif;
 }
 
