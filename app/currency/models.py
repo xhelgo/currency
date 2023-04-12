@@ -39,6 +39,7 @@ class ContactUs(models.Model):
 
     class Meta:
         verbose_name_plural = 'emails'
+        ordering = ('-created', )
 
     def __str__(self):
         return f'From: {self.email_from}, Subject{self.subject}'
