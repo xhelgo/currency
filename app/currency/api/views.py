@@ -1,11 +1,12 @@
-from rest_framework import viewsets, generics, permissions
+from rest_framework import viewsets, generics
 from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from django_filters import rest_framework as filters
 from rest_framework import filters as rest_framework_filters
 
+from currency.api.mixins import IsSuperUserMixin
 from currency.api.serializers import RateSerializer, SourceSerializer, ContactUsSerializer
-from currency.filters import RateFilter, EmailsFilter
+from currency.filters import EmailsFilter, RateAPIFilter
 from currency.models import Rate, Source, ContactUs
 
 
@@ -18,7 +19,7 @@ class RateViewSet(viewsets.ModelViewSet):
         filters.DjangoFilterBackend,
         rest_framework_filters.OrderingFilter,
     )
-    filterset_class = RateFilter
+    filterset_class = RateAPIFilter
     ordering_fields = ('id', 'created', 'buy', 'sell')
 
 
@@ -28,13 +29,7 @@ class SourceApiView(generics.ListAPIView):
     renderer_classes = (JSONRenderer,)
 
 
-class IsSuperUser(permissions.BasePermission):
-    # Check if the user is_superuser
-    def has_permission(self, request, view):
-        return request.user and request.user.is_superuser
-
-
-class ContactUsViewSet(viewsets.ModelViewSet):
+class ContactUsViewSet(IsSuperUserMixin, viewsets.ModelViewSet):
     queryset = ContactUs.objects.all()
     serializer_class = ContactUsSerializer
     renderer_classes = (JSONRenderer,)
@@ -49,7 +44,7 @@ class ContactUsViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'list':
-            permission_classes = (IsSuperUser,)
+            permission_classes = (IsSuperUserMixin,)
         else:
             permission_classes = (AllowAny,)
         return [permission() for permission in permission_classes]
