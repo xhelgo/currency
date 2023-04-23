@@ -5,9 +5,11 @@
         <button type="button" class="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton">
             Filter
         </button>
-        <div class="dropdown-menu filter-menu" style="width: 200px; padding: 10px">
+        <div class="dropdown-menu filter-menu" style="width: 200px; padding: 10px;">
+            <div class="form-body" style="max-height: 275px; overflow-y: auto;">
             {{ filter.form|crispy }}
-            <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Apply</button>
         </div>
     </form>
 </div>
