@@ -13,16 +13,7 @@ class SourceSerializer(serializers.ModelSerializer):
         )
 
 
-# Serializer for separate field
-# class SourceForRateSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Source
-#         fields = ('name',)
-
-
 class RateSerializer(serializers.ModelSerializer):
-    # source = SourceForRateSerializer()
-
     class Meta:
         model = Rate
         fields = (
