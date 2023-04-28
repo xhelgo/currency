@@ -2,4 +2,6 @@
 venv
 *.sqlite3
 __pycache__
+.pytest_cache
 app/celerybeat-schedule
+.coverage
