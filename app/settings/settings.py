@@ -202,7 +202,7 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '100/min',
+        'anon': '3/min',
         'user': '20/min'
     },
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
