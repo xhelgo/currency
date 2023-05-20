@@ -58,4 +58,4 @@ urlpatterns = [
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 
-urlpatterns += static(settings.settings.MEDIA_URL, document_root=settings.settings.MEDIA_ROOT)
+urlpatterns += static(settings.settings.base.MEDIA_URL, document_root=settings.settings.base.MEDIA_ROOT)

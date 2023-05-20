@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nk14^lul@_^64%yru$9d_igjistn_=zgp84gycgf=7%(!a7(e^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -141,8 +141,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'app/static']
+STATIC_ROOT = BASE_DIR.parent / 'static_content' / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.parent / 'static_content' / 'media'
@@ -185,6 +185,13 @@ CELERY_BEAT_SCHEDULE = {
     'parse_oshchadbank': {
         'task': 'currency.tasks.parse_oshchad',
         'schedule': crontab(minute='*/5')
+    }
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": "127.0.0.1:11211",
     }
 }
 
@@ -233,3 +240,8 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+# try:
+#     from settings_local import *
+# except ImportError:
+#     print('Invalid local settings')
