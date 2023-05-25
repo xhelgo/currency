@@ -6,4 +6,4 @@ class CurrencyConfig(AppConfig):
     name = 'currency'
 
     def ready(self):
-        import currency.receivers
+        import currency.receivers  # noqa: F401

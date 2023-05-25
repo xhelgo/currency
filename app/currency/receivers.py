@@ -9,5 +9,5 @@ from currency.models import Rate
 @receiver(post_save, sender=Rate)
 def rate_create_clear_cache(sender, instance, created, **kwargs):
     if created:
-        print('rate create cache clear')
+        # print('rate create cache clear')
         cache.delete(constants.LATEST_RATE_CACHE)

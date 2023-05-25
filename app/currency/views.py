@@ -1,13 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
 from django.utils.http import urlencode
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
-from django.views.decorators.cache import cache_page
 
-from currency import constants
 from currency.filters import RateFilter, EmailsFilter
 from currency.models import Rate, ContactUs, Source
 from currency.forms import RateForm, SourceForm, ContactUsForm
