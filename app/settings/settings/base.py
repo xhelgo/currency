@@ -9,26 +9,38 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+# import os.path
 from datetime import timedelta
 from pathlib import Path
 
 from celery.schedules import crontab
 from django.urls import reverse_lazy
 
+import os
+from environ import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+environ.Env.read_env(os.path.join(BASE_DIR.parent, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nk14^lul@_^64%yru$9d_igjistn_=zgp84gycgf=7%(!a7(e^'
+
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', [])
 
 
 # Application definition
@@ -100,11 +112,14 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env.str('POSTGRES_DB', 'currency-db'),
+        'USER': env.str('POSTGRES_USER', ''),
+        'PASSWORD': env.str('POSTGRES_PASSWORD', ''),
+        'HOST': env.str('POSTGRES_HOST', 'localhost'),
+        'PORT': env.str('POSTGRES_PORT', '5432'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -141,8 +156,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'app/static']
-STATIC_ROOT = BASE_DIR.parent / 'static_content' / 'static'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+# STATIC_ROOT = BASE_DIR.parent / 'static_content' / 'static'
+STATIC_ROOT = '/tmp/static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.parent / 'static_content' / 'media'
@@ -171,7 +187,12 @@ HOST = 'localhost:8000'
 HTTP_SCHEMA = 'http'
 
 # CELERY
-CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = 'amqp://{0}:{1}@{2}:{3}//'.format(
+    env.str('RABBITMQ_DEFAULT_USER', 'guest'),
+    env.str('RABBITMQ_DEFAULT_PASS', 'guest'),
+    env.str('RABBITMQ_DEFAULT_HOST', '127.0.0.1'),
+    env.str('RABBITMQ_DEFAULT_PORT', '5672')
+)
 
 CELERY_BEAT_SCHEDULE = {
     'parse_privatbank': {
@@ -191,7 +212,7 @@ CELERY_BEAT_SCHEDULE = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
+        "LOCATION": f"{env.str('CACHE_DEFAULT_HOST', '127.0.0.1')}:{env.str('CACHE_DEFAULT_PORT', '127.0.0.1')}"
     }
 }
 
@@ -240,8 +261,3 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
-
-# try:
-#     from settings_local import *
-# except ImportError:
-#     print('Invalid local settings')
