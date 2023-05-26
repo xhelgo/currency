@@ -1,0 +1,4 @@
+[
+  {"model": "account.user", "pk": 2, "fields": {"password": "", "last_login": null, "is_superuser": false, "username": "authenticated_test_user", "first_name": "", "last_name": "", "is_staff": false, "is_active": true, "date_joined": "2023-04-28T13:08:54.904Z", "email": "regular@test.com", "avatar": "", "phone": null, "groups": [], "user_permissions": []}},
+  {"model": "account.user", "pk": 4, "fields": {"password": "", "last_login": null, "is_superuser": true, "username": "super_test_user", "first_name": "", "last_name": "", "is_staff": false, "is_active": true, "date_joined": "2023-04-28T13:41:23.379Z", "email": "superuser@test.com", "avatar": "", "phone": null, "groups": [], "user_permissions": []}}
+]

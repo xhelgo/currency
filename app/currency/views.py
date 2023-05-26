@@ -15,6 +15,7 @@ from currency.mixins import MyPaginatorMixin
 # Create your views here.
 
 
+# @method_decorator(cache_page(60 * 5), name='dispatch')
 class RateListView(MyPaginatorMixin, FilterView):
     template_name = 'rates_list.html'
     paginate_by = 10
