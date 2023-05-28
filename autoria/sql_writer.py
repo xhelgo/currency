@@ -10,10 +10,10 @@ def autoria_sql_writer():
     cur = conn.cursor()
 
     # Drop the table if it already exists
-    # cur.execute("DROP TABLE IF EXISTS cars")
+    cur.execute("DROP TABLE IF EXISTS cars")
 
-    # Create a table with the same column names as the csv file if it does not exist
-    cur.execute("CREATE TABLE IF NOT EXISTS cars "
+    # Create a table with the same column names as the csv file
+    cur.execute("CREATE TABLE cars "
                 "(car_id INTEGER, "
                 "data_link_to_view VARCHAR(255), "
                 "model_and_year VARCHAR(255), "
@@ -34,3 +34,7 @@ def autoria_sql_writer():
     # Commit the changes and close the connection
     conn.commit()
     conn.close()
+
+
+if __name__ == '__main__':
+    autoria_sql_writer()
