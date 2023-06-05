@@ -1,5 +1,5 @@
 
-manage_py := python app/manage.py
+manage_py := docker compose exec -it backend python app/manage.py
 
 run:
 	$(manage_py) runserver
@@ -12,6 +12,11 @@ makemigrations:
 
 shell:
 	$(manage_py) shell_plus --print-sql
+
+collectstatic:
+	$(manage_py) collectstatic --no-input && \
+	docker cp backend:/tmp/static /tmp/static && \
+	docker cp /tmp/static nginx:/etc/nginx/static
 
 createsuperuser:
 	$(manage_py) createsuperuser
@@ -26,4 +31,4 @@ beat:
 	cd app && celery -A settings beat -l info
 
 pytest:
-	pytest ./app/tests --cov=app  --cov-report html
+	docker compose exec -it backend pytest ./app/tests --cov=app  --cov-report html
